@@ -1,0 +1,64 @@
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { useState } from 'react';
+import { auth } from '../firebase/firebase';
+
+export default function Login() {
+  const [emailValue, setEmailValue] = useState('');
+  const [passwordValue, setPasswordValue] = useState('');
+
+  function handleSubmit(event) {
+    event.preventDefault();
+    console.log('ar veikia?');
+    // atspausdinti email ir passwor cia
+    console.log('emailValue ===', emailValue);
+    console.log('passwordValue ===', passwordValue);
+
+    // nutraukti funkcijo vykdyma jei tuscias email arba password
+    if (!emailValue.trim() || !passwordValue.trim()) {
+      return console.log('Visi laukeliai privalomi');
+    }
+    loginWithFirebase();
+    console.log('forma ok');
+  }
+
+  function loginWithFirebase() {
+    signInWithEmailAndPassword(auth, emailValue, passwordValue)
+      .then((userCredential) => {
+        // Signed in
+        const user = userCredential.user;
+        // ...
+        console.log('user ===', user);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log('errorCode ===', errorCode);
+        console.log('errorMessage ===', errorMessage);
+      });
+  }
+
+  return (
+    <div>
+      <h2>Login here</h2>
+      <form onSubmit={handleSubmit}>
+        <input
+          onChange={(event) => setEmailValue(event.target.value)}
+          value={emailValue}
+          type='text'
+          placeholder='your email'
+        />
+        <input
+          onChange={(event) => setPasswordValue(event.target.value)}
+          value={passwordValue}
+          type='password'
+          placeholder='your password'
+        />
+        <button type='submit'>Login</button>
+      </form>
+      <div>
+        <p>Entered email: {emailValue}</p>
+        <p>Entered password: {passwordValue}</p>
+      </div>
+    </div>
+  );
+}

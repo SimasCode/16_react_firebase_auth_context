@@ -1,4 +1,5 @@
 import './App.css';
+import Login from './components/Login';
 import { app } from './firebase/firebase';
 import './reset.css';
 
@@ -7,6 +8,7 @@ export default function App() {
   return (
     <div className='container'>
       <h1>Firebase</h1>
+      <Login />
     </div>
   );
 }
