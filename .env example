@@ -1,0 +1,6 @@
+VITE_FIREBASE_apiKey='your firebase'
+VITE_FIREBASE_authDomain='your firebase'
+VITE_FIREBASE_projectId='your firebase'
+VITE_FIREBASE_storageBucket='your firebase'
+VITE_FIREBASE_messagingSenderId='your firebase'
+VITE_FIREBASE_appId='your firebase'
